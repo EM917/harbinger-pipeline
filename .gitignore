@@ -1,0 +1,40 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+*~
+.vscode/
+.idea/
+
+# Python (in case of analysis scripts later)
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Notebooks
+.ipynb_checkpoints/
+
+# Local scratch — not for shared cases
+*.local.md
+scratch/
+
+# Claude Code harness — local permissions only, never commit
+.claude/settings.local.json
+
+# EDGAR monitor — run logs + date-stamped weekly digests are disposable/untracked.
+# Only signals/EDGAR_MONITOR_CALIBRATION.md is committed; the edgar_YYYY-MM-DD.md
+# digests regenerate each scan. The `edgar_2*` glob is scoped so it never matches
+# EDGAR_MONITOR_CALIBRATION.md.
+signals/cache/
+signals/edgar_2*.md
+
+# Funnel log (Tier 6.2) — runtime market-cap cache + transient temp DBs
+# (data/funnel_log.db IS committed; only the cache + temp scratch are ignored)
+data/market_cap_cache.json
+data/relative_return_cache.json
+data/_tmp*.db
+
+# Unrelated foreign file present in the working dir — NOT part of this SEC-research
+# project (creative-fiction content). Kept on disk, never tracked in this repo.
+liu_aman.json
