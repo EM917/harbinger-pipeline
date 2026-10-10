@@ -1,0 +1,39 @@
+# SIC code + 8-K Item filter for scripts/edgar_monitor.py
+# Edit to customize per-user / per-strategy.
+
+default_sic_codes:
+  - 3674  # Semiconductors
+  - 3812  # Search, Detection, Navigation, Guidance
+  - 3825  # Industrial Instruments
+  - 3826  # Laboratory Instruments
+  - 3827  # Optical Instruments and Lenses
+  - 3841  # Surgical and Medical Instruments
+  - 3845  # Electromedical and Electrotherapeutic Apparatus
+  - 3669  # Communications Equipment NEC
+  - 7370  # Computer Services
+  - 7371  # Computer Programming Services
+  - 7372  # Prepackaged Software
+
+items_to_monitor:
+  - "1.01"  # Entry into Material Definitive Agreement
+  - "5.02"  # Officer Departure/Appointment
+  - "8.01"  # Other Events
+
+item_descriptions:
+  "1.01": "Entry into a Material Definitive Agreement"
+  "5.02": "Departure/Appointment of Directors or Certain Officers"
+  "8.01": "Other Events"
+
+default_lookback_days: 7
+
+# Body excerpt fetching (Tier 4 Lite Component 3): per matched hit, fetch
+# filing index + primary 8-K body, extract per-Item section text, truncate
+# for digest display. Metadata-only digest was insufficient for partnership-
+# reveal triage per 2026-05 calibration (signals/EDGAR_MONITOR_CALIBRATION.md).
+excerpt_max_chars: 300              # truncate at max_chars OR sentence boundary in [150, max_chars]
+excerpt_fetch_enabled_default: true # CLI --no-excerpts opts out for fast metadata-only runs
+
+# Note on Item 8.01: "Other Events" is broad and includes routine items
+# (dividend declarations, conference attendance, etc.). Signal-to-noise
+# ratio is lower than 1.01/5.02. Remove "8.01" from items_to_monitor if
+# noise is excessive for your strategy.
